@@ -31,4 +31,6 @@ func TestGetUserByTwitterID(t *testing.T) {
 	Expect(t, err).ToBe(nil)
 
 	Expect(t, found.ScreenName).ToBe("otiai10")
+
+    _, _ = GetUserByTwitterID("000000")
 }

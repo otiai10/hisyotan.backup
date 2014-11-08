@@ -18,3 +18,14 @@ func filtered(status botw.Status) bool {
 	}
 	return false
 }
+
+// TODO: botwの機能に持って行きたい
+// act.Reply(status, text) 的な
+// 本当は act.Reply(text)の方がいい
+func newReplay(status botw.Status, text string) botw.Status {
+	reply := botw.Status{}
+	reply.InReplyToStatusIdStr = status.IdStr
+	reply.InReplyToUserIdStr = status.User.IdStr
+	reply.Text = "@" + status.User.ScreenName + " " + text
+	return reply
+}

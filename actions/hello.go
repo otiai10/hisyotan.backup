@@ -2,6 +2,8 @@ package actions
 
 import (
 	"fmt"
+	"hisyotan/conf"
+	"hisyotan/models"
 
 	"github.com/otiai10/botw"
 )
@@ -13,16 +15,23 @@ type Hello struct {
 
 // Match ...
 func (act *Hello) Match(status botw.Status) bool {
-	return false
-	/*
-		    if filtered(status) {
-		        return false
-		    }
-			return models.ParseText(status.Text).Has(conf.My.Name(true), "hello")
-	*/
+	if filtered(status) {
+		return false
+	}
+	return models.ParseText(status.Text).Has(conf.Name(true), "hello")
 }
 
 // Execute ...
 func (act *Hello) Execute(status botw.Status) {
-	fmt.Println(status.Text)
+	_, err := models.GetUserByTwitterID(status.User.IdStr)
+	if err == nil {
+		// found
+		// TODO: feedback
+		return // do nothing
+	}
+	user := models.NewUser(status.User.ScreenName, status.User.IdStr)
+	if err := user.Save(); err != nil {
+		// TODO: do nothing
+	}
+	fmt.Println("Hello: ", act.Tweet(newReplay(status, "よろしくお願いします！")))
 }
