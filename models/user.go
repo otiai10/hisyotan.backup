@@ -20,7 +20,7 @@ func init() {
 type User struct {
 	TwitterID  string
 	ScreenName string
-	Tasks      []Task
+	Tasks      Tasks
 }
 
 // GetUserByTwitterID ...

@@ -53,12 +53,17 @@ func (elm *Elements) Add(words ...string) *Elements {
 	return elm
 }
 
+// List ...
+func (elm *Elements) List() []string {
+	res := []string{}
+	for _, w := range elm.dict {
+		res = append(res, w)
+	}
+	return res
+}
+
 // ToText ...
 func (elm *Elements) ToText(args ...string) string {
 	args = append(args, "", "")
-	pool := []string{}
-	for _, w := range elm.dict {
-		pool = append(pool, w)
-	}
-	return args[0] + " " + strings.Join(pool, elm.joint) + " " + args[1]
+	return args[0] + " " + strings.Join(elm.List(), elm.joint) + " " + args[1]
 }

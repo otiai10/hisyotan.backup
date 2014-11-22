@@ -33,5 +33,5 @@ func (act *Hello) Execute(status botw.Status) {
 	if err := user.Save(); err != nil {
 		// TODO: do nothing
 	}
-	fmt.Println("Hello: ", act.Tweet(newReplay(status, "よろしくお願いします！")))
+	fmt.Println("Hello: ", act.Tweet(newReply(status, "よろしくお願いします！")))
 }
